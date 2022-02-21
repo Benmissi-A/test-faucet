@@ -1,7 +1,6 @@
 import React from "react";
 import {useState } from "react";
-import { ethers } from "ethers";
-import {terrabioFaucetAddress,terrabioFaucetAbi} from "./contracts/TerrabioFaucet"
+import {ethers} from 'ethers'
 
 // import {
 //   TerraBioTokenAddress,
@@ -9,26 +8,18 @@ import {terrabioFaucetAddress,terrabioFaucetAbi} from "./contracts/TerrabioFauce
 // } from "./contracts/TerraBioToken";
 // import Dapp from "./Dapp";
 
-
 function App() {
     //connect to metamask
     const [errorMessage,setErrorMessage] = useState(null)
     const [defaultAccount,setDefaultAccount] = useState(null)
-    const [connectButtonText, setConnectButtonText] = useState('connect Wallet')
-
     const [userBalance, setUserbalance] = useState(null)
-    
-    const [currentContractVal,setCurrentContractVal] = useState(null)
-    const [provider, setProvider] = useState(null)
-    const [signer, setSigner] = useState(null)
-    const [contract, setContract] = useState(null)
- 
+    const [connectButtonText, setConnectButtonText] = useState(null)
+
     const connectWalletHandler = () => {
         if(window.ethereum) {
             window.ethereum.request({method: 'eth_requestAccounts'})
             .then(result => {
               accountChangedHandler(result[0])
-              setConnectButtonText('Wallet connected')
             }) 
         }else{
             setErrorMessage('install Metamask')
@@ -36,7 +27,6 @@ function App() {
     }
     const accountChangedHandler = (newAccount) => {
         setDefaultAccount(newAccount)
-        updateEthers()
         getUserBalance(newAccount)
     }
     const getUserBalance = (address) => {
@@ -45,24 +35,6 @@ window.ethereum.request({method: 'eth_getBalance', params: [address, 'latest']})
     setUserbalance(ethers.utils.formatEther(balance))
 })
     }
-const updateEthers = () => {
-    let tempProvider = new ethers.providers.Web3Provider(window.ethereum)
-    setProvider(tempProvider)
-
-    let tempSigner = tempProvider.getSigner()
-    setSigner(tempSigner)
-
-    let faucetContract = new ethers.Contract(terrabioFaucetAddress, terrabioFaucetAbi, tempSigner)
-    setContract(faucetContract)
-}
-
-const handleClickBuyTokens = async () => {
-    try{
-        await contract.buyTokens()
-    }catch(e){
-        console.log(e.message)
-    }
-}
 
 // useEffect(()=>{
 //     const
@@ -81,9 +53,6 @@ const handleClickBuyTokens = async () => {
                 <h3>Balance : {userBalance}</h3>
                 {errorMessage}
             </div>
-        </div>
-        <div className="Claim">
-           <button onClick={handleClickBuyTokens}>Claim 60 TBIO</button>      
         </div>
     </>
   );
