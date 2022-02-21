@@ -18,7 +18,7 @@ function App() {
 
     const [userBalance, setUserbalance] = useState(null)
     
-    const [currentContractVal,setCurrentContractVal] = useState(null)
+    //const [currentContractVal,setCurrentContractVal] = useState(null)
     const [provider, setProvider] = useState(null)
     const [signer, setSigner] = useState(null)
     const [contract, setContract] = useState(null)
@@ -49,10 +49,10 @@ const updateEthers = () => {
     let tempProvider = new ethers.providers.Web3Provider(window.ethereum)
     setProvider(tempProvider)
 
-    let tempSigner = tempProvider.getSigner()
+    let tempSigner = provider.getSigner()
     setSigner(tempSigner)
 
-    let faucetContract = new ethers.Contract(terrabioFaucetAddress, terrabioFaucetAbi, tempSigner)
+    let faucetContract = new ethers.Contract(terrabioFaucetAddress, terrabioFaucetAbi, signer)
     setContract(faucetContract)
 }
 
@@ -73,7 +73,7 @@ const handleClickBuyTokens = async () => {
       <h1>test</h1>
         <div className="walletCard">
             <h4>{'Connection to Metamask using window.ethereum method'}</h4>
-            <button onClick={connectWalletHandler}>connect to metamask</button>
+            <button onClick={connectWalletHandler}>{connectButtonText}</button>
             <div className="'accountDisplay">
                 <h3>Account: {defaultAccount}</h3>
             </div>
