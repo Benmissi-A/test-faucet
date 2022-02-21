@@ -19,8 +19,8 @@ function App() {
     const [userBalance, setUserbalance] = useState(null)
     
     //const [currentContractVal,setCurrentContractVal] = useState(null)
-    const [provider, setProvider] = useState(null)
-    const [signer, setSigner] = useState(null)
+    //const [provider, setProvider] = useState(null)
+    //const [signer, setSigner] = useState(null)
     const [contract, setContract] = useState(null)
  
     const connectWalletHandler = () => {
@@ -47,12 +47,10 @@ window.ethereum.request({method: 'eth_getBalance', params: [address, 'latest']})
     }
 const updateEthers = () => {
     let tempProvider = new ethers.providers.Web3Provider(window.ethereum)
-    setProvider(tempProvider)
 
-    let tempSigner = provider.getSigner()
-    setSigner(tempSigner)
+    let tempSigner = tempProvider.getSigner()
 
-    let faucetContract = new ethers.Contract(terrabioFaucetAddress, terrabioFaucetAbi, signer)
+    let faucetContract = new ethers.Contract(terrabioFaucetAddress, terrabioFaucetAbi, tempSigner)
     setContract(faucetContract)
 }
 
