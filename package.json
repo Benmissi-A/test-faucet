@@ -1,5 +1,5 @@
 {
-  "name": "my-app",
+  "name": "terrabioFaucet",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -35,5 +35,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "description": "faucet test",
+  "main": "index.js",
+  "repository": "https://github.com/Benmissi-A/test-faucet.git",
+  "author": "Benmissi-A and terrabio team",
+  "license": "MIT"
 }
