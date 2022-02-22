@@ -55,11 +55,13 @@ const updateEthers = () => {
 }
 
 const handleClickBuyTokens = async () => {
-    console.log(contract)
+    
     try{
         await contract.buyTokens()
     }catch(e){
-       
+       console.log(e.data.message)
+       setErrorMessage(e.data.message)
+      
     }
 }
 
@@ -71,7 +73,7 @@ const handleClickBuyTokens = async () => {
     <>
       <h1>TerraBioDao Faucet</h1>
         <div className="walletCard">
-            <h4>{'Connection to Metamask'}</h4>
+            <h4>{'Click on the button to connect your Metamask wallet'}</h4>
             <button onClick={connectWalletHandler}>{connectButtonText}</button>
             <div className="'accountDisplay">
             <h4>{'some informations about signer'}</h4>
@@ -79,12 +81,14 @@ const handleClickBuyTokens = async () => {
             </div>
             <div className="'balanceDisplay">
                 <h3>Balance : {userBalance}</h3>
-                {errorMessage}
             </div>
         </div>
         <div className="Claim">
         <h4>{'click on the button to claim 60 TBIO once per 12 hours'}</h4>
            <button onClick={handleClickBuyTokens}>Claim 60 TBIO</button>      
+        </div>
+        <div>
+            <p>{errorMessage && errorMessage.split(':')[2]}</p>
         </div>
     </>
   );
