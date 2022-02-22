@@ -69,11 +69,12 @@ const handleClickBuyTokens = async () => {
 
   return (
     <>
-      <h1>test</h1>
+      <h1>TerraBioDao Faucet</h1>
         <div className="walletCard">
-            <h4>{'Connection to Metamask using window.ethereum method'}</h4>
+            <h4>{'Connection to Metamask'}</h4>
             <button onClick={connectWalletHandler}>{connectButtonText}</button>
             <div className="'accountDisplay">
+            <h4>{'some informations about signer'}</h4>
                 <h3>Account: {defaultAccount}</h3>
             </div>
             <div className="'balanceDisplay">
@@ -82,6 +83,7 @@ const handleClickBuyTokens = async () => {
             </div>
         </div>
         <div className="Claim">
+        <h4>{'click on the button to claim 60 TBIO once per 12 hours'}</h4>
            <button onClick={handleClickBuyTokens}>Claim 60 TBIO</button>      
         </div>
     </>
