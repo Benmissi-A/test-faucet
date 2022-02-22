@@ -55,6 +55,7 @@ const updateEthers = () => {
 }
 
 const handleClickBuyTokens = async () => {
+    console.log(contract)
     try{
         await contract.buyTokens()
     }catch(e){
