@@ -59,7 +59,7 @@ const handleClickBuyTokens = async () => {
     try{
         await contract.buyTokens()
     }catch(e){
-       console.log(e.data.message)
+       console.log(e)
        setErrorMessage(e.data.message)
       
     }
